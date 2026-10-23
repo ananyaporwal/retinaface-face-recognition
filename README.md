@@ -1,92 +1,53 @@
-# RetinaFace + FaceNet Face Recognition
+# RetinaFace Face Recognition
 
-A starter project for real-time face detection and recognition using:
-- **RetinaFace** for face detection
-- **FaceNet-style embeddings** (`InceptionResnetV1`, pretrained on VGGFace2) for face recognition
-- **OpenCV** for webcam input and display
+A face detection and recognition project using RetinaFace, FaceNet embeddings, and cosine similarity.
 
-> This is a learning/portfolio starter, not a security or access-control system. Recognition can be wrong. Use only with informed consent, and keep face images and embeddings private.
+## Features
+- Face detection using RetinaFace
+- Face embeddings using FaceNet
+- Similarity-based identity matching
+- Unknown-face rejection
+- Detection and recognition evaluation scripts
 
-## 1. Setup (Windows / VS Code)
+## Tech Stack
+- Python
+- OpenCV
+- RetinaFace
+- FaceNet (InceptionResnetV1)
+- NumPy
+- PyTorch
 
-Open this project folder in VS Code. In the terminal, run:
+## Project Structure
+- `app.py` — webcam recognition application
+- `register_faces.py` — register identities from face images
+- `src/` — detection, embeddings, and matching modules
+- `tests/` — evaluation and demo scripts
+- `reports/figures/` — sample output images
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
+## Setup
+
+Create and activate a virtual environment, then install dependencies:
+
+```bash
 python -m pip install -r requirements.txt
 ```
 
-If PowerShell blocks activation, run this once in the current terminal and retry activation:
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-```
+## Run
 
-The first run downloads pretrained model weights and may take a few minutes. Internet access is required for the initial download.
-
-## 2. Register faces
-
-Create a folder for each consenting person, then place a few clear face photos in it:
-
-```text
-data/
-  registered_faces/
-    Alice/
-      photo1.jpg
-      photo2.jpg
-    Bob/
-      photo1.jpg
-```
-
-You can use `.jpg`, `.jpeg`, `.png`, and `.webp` images. Keep each image focused on one face.
-
-Then run:
-```powershell
-python register_faces.py
-```
-
-This creates `data/embeddings.pkl`, a local file containing face embeddings and labels. Do not upload this file or the photos to GitHub.
-
-## 3. Run the webcam app
-
-```powershell
+```bash
 python app.py
 ```
 
-- Press **q** to quit.
-- Faces not close enough to a registered embedding are labelled **Unknown**.
-- If your webcam is not camera 0, edit `CAMERA_INDEX` in `config.py`.
+For the webcam application, register face images and generate the required embeddings first.
 
-## 4. Tune recognition
+## Evaluation
 
-`SIMILARITY_THRESHOLD` in `config.py` is a starting point, not a universal value. Higher thresholds are stricter and may label more faces Unknown; lower thresholds may cause false matches. Evaluate on images/videos that are separate from the registration photos before drawing conclusions.
+The project includes scripts for LFW recognition evaluation and sampled WIDER FACE detection evaluation. Results are sample evaluations, not official benchmark results.
 
-## Project structure
+## Privacy
 
-```text
-retinaface-face-recognition/
-├── app.py
-├── register_faces.py
-├── config.py
-├── requirements.txt
-├── README.md
-├── .gitignore
-├── data/
-│   ├── registered_faces/   # Add your own consented photos
-│   ├── samples/
-│   └── embeddings.pkl      # Generated locally
-├── src/
-│   ├── detector.py
-│   ├── embedder.py
-│   └── matcher.py
-└── tests/
-    └── test_matcher.py
-```
+Downloaded datasets, local face images, embeddings, and model weights should not be committed to this repository.
 
-## Notes and limitations
+## Status
 
-- RetinaFace is used for detection; FaceNet-style embeddings are used for recognition. They are separate pretrained components.
-- This starter uses a face crop resized to the embedding model's input size. It does not yet perform landmark-based face alignment or a formal accuracy evaluation.
-- Lighting, pose, camera quality, and threshold choice affect results.
-- For a portfolio-ready version, add landmark-based alignment, a held-out evaluation set, precision/recall or ROC analysis, and clear limitations in the report.
+This project is under development. More improvements and documentation will be added.
