@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Local face data and biometric embeddings
+data/registered_faces/*
+!data/registered_faces/.gitkeep
+data/embeddings.pkl
+data/lfw_gallery.pkl
+data/samples/*
+!data/samples/.gitkeep
+
+# Downloaded datasets
+data/WIDER_val/
+data/wider_face_split/
+data/lfw_home/
+
+# Model weights and caches
+.models/
+.deeepface/
+*.h5
+*.pth
+*.pt
+
+# Generated reports (allow selected demo screenshots)
+reports/*
+!reports/figures/
+reports/figures/*
+!reports/figures/recognition_result.jpg
+!reports/figures/lfw_recognition_demo.jpg
+
+# OS/editor files
+.DS_Store
+.vscode/
